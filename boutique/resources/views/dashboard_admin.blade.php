@@ -2,8 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Bienvenue, {{ Auth::user()->nom }}</h1>
-    <p>Ceci est votre tableau de bord.</p>
+    <h1>Tableau de bord administrateur</h1>
+    <a href="{{ route('articles.create') }}" class="btn btn-primary">Ajouter un article</a>
 </div>
-
 @endsection
