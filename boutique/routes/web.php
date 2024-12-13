@@ -6,10 +6,10 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\WelcomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WelcomeController::class, 'index']);
+
 
 Auth::routes();
 
@@ -20,8 +20,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
 
 });
-
-//dashboard
 
 //Utilisateur
 Route::get('/user/dashboard', [DashboardController::class, 'index'])->name('user.dashboard')->middleware(['auth']);
@@ -38,5 +36,14 @@ Route::get('/dashboard', function () {
 
     return redirect('/'); // Redirige vers la page d'accueil si non connecté
 })->name('dashboard');
+
+Route::resource('articles', ArticleController::class)->except(['show']);
+
+Route::get('/commande/create/{id}', [CommandeController::class, 'create'])->name('commande.create');
+
+
+
+
+
 
 

@@ -25,5 +25,19 @@ class ArticleController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Article ajouté avec succès.');
     }
+
+    public function edit($id)
+    {
+        $article = Article::findOrFail($id);
+        return view('article.edit', compact('article'));
+    }
+
+    public function destroy($id)
+    {
+        $article = Article::findOrFail($id);
+        $article->delete();
+        return redirect()->route('admin.dashboard')->with('success', 'Article supprimé avec succès.');
+    }
+
 }
 
