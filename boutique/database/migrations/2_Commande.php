@@ -10,11 +10,18 @@ return new class extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id'); // Référence à la table 'users'
             $table->date('date');
+            $table->decimal('montant_total', 8, 2);
             $table->timestamps();
+        
+            // Ajouter une clé étrangère
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
         });
+        
     }
 
     public function down(): void

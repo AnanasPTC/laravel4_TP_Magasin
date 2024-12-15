@@ -14,6 +14,12 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="bg-gray-100 text-gray-900 antialiased">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <div class="min-h-screen flex flex-col">
 
             <!-- Header -->

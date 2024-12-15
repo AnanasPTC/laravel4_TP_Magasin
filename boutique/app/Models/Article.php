@@ -16,7 +16,7 @@ class Article extends Model
         'stock',
     ];
 
-    public function Commande()
+    public function commandes()
     {
         return $this->belongsToMany(Commande::class, 'article_commande')
                     ->withPivot('quantity');

@@ -19,7 +19,7 @@ class CommandeController extends Controller
      */
     public function create($id)
     {
-        $article = Article::findOrFail($id); // Trouve l'article par son ID ou retourne une erreur 404
+        $article = Article::findOrFail($id);
         return view('commande.create', compact('article'));
     }
 
@@ -37,13 +37,15 @@ class CommandeController extends Controller
         $commande = Commande::create([
             'date' => now(),
             'montant_total' => $article->prix * $request->quantity,
-            'id_client' => auth()->id(),
+            'user_id' => auth()->id(), // Associe la commande à l'utilisateur authentifié
         ]);
 
         $commande->Article()->attach($article->id, ['quantity' => $request->quantity]);
 
-        return redirect()->route('commande.index')->with('success', 'Commande créée avec succès !');
+        return redirect('/')
+            ->with('success', 'Votre commande a été créée avec succès !');
     }
+
 
     
     

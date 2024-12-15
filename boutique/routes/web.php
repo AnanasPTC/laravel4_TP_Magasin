@@ -41,6 +41,10 @@ Route::resource('articles', ArticleController::class)->except(['show']);
 
 Route::get('/commande/create/{id}', [CommandeController::class, 'create'])->name('commande.create');
 
+Route::post('/commande', [CommandeController::class, 'store'])->name('commande.store');
+
+Route::resource('commande', CommandeController::class)->except(['create']);
+
 
 
 

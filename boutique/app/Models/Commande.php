@@ -12,13 +12,15 @@ class Commande extends Model
     protected $fillable = [
         'date',
         'montant_total',
-        'id_client',
+        'user_id',
     ];
+    
 
-    public function Article()
+    public function articles()
     {
         return $this->belongsToMany(Article::class, 'article_commande')
-                    ->withPivot('quantity');
+                    ->withPivot('quantity')
+                    ->withTimestamps();
     }
 
     public function User()

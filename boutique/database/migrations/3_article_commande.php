@@ -9,16 +9,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('article_commande', function (Blueprint $table) {
-            $table->id(); // Clé primaire 
-            //$table->unsignedBigInteger('commande_id'); // Clé étrangère commandes
-            //$table->unsignedBigInteger('article_id');  // Clé étrangère articles
+            $table->id();
+            $table->unsignedBigInteger('commande_id');
+            $table->unsignedBigInteger('article_id');
             $table->integer('quantity');
             $table->timestamps();
-
+        
             // Clés étrangères
-            $table->foreignId('commande_id')->constrained()->onDelete('cascade');
-            $table->foreignId('article_id')->constrained()->onDelete('cascade');
+            $table->foreign('commande_id')->references('id')->on('commandes')->onDelete('cascade');
+            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
         });
+        
+        
     }
 
     public function down()
